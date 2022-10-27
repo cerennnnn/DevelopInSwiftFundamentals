@@ -54,12 +54,12 @@ class Fighter: Spaceship {
 
 var destroyer = Fighter(name: "Destroyer")
 destroyer.weapon = "Laser"
-//destroyer.remainingFirePower = 10
+destroyer.remainingFirePower = 10
 //destroyer.name = "Destroyer"
 destroyer.moveRight()
 print(destroyer.position)
 
-// we cannot call weapon on falcon variable instance because the subclass is NOT the Spaceship class therefore the child class Fighter's property cannot be called in the parent class.
+// we cannot call weapon via falcon instance bc the subclass is NOT the Spaceship class therefore the child class Fighter's property cannot be called in the parent class.
 
 for _ in 1...5 {
     destroyer.fire()
@@ -76,8 +76,7 @@ class ShieldedShip: Fighter {
         if shieldStrength > 0 {
             shieldStrength -= 1
         } else {
-            super.wasHit()
-//            it means health -= 5
+            super.wasHit()  //   same as health -= 5
         }
     }
 }
@@ -104,4 +103,4 @@ print(falcon.position)
 sameShip.moveLeft()
 print(sameShip.position, falcon.position)
 
-//the sameShip and falcon instances are printing the same result bc classes are reference types which means no matter how many instances are created from the same class, it all points the same place on memory therefore inside of the print function the results will be the same.
+//the sameShip and falcon instances are printing the same result bc classes are reference types which means no matter how many instances are created from the same class, it all points the same place on memory, therefore inside of the print function the results will be the same.
