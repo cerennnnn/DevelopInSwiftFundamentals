@@ -1,106 +1,100 @@
 import UIKit
 
-class Spaceship {
-    var name: String = ""
-    var health = 0
-    var position = 0
-    
-    init(name: String) {
-        self.name = name
-    }
-    
-    func moveLeft() {
-        position -= 1
-    }
-    
-    func moveRight() {
-        position += 1
-    }
-    
-    func wasHit() {
-        health -= 5
-        if health <= 0 {
-            print("Sorry, your ship was hit one too many times. Do you want to play again?")
-        }
-    }
+import UIKit
+
+//page 1 of 4
+var registrationList: [String] = []
+
+registrationList.append("Sarah")
+print(registrationList)
+
+registrationList += ["Clay", "Hannah", "Jessica", "Justin"]
+print(registrationList)
+
+registrationList.insert("Charlie", at: 1)
+print(registrationList)
+
+registrationList[5] = "Rebeca"
+print(registrationList)
+
+let deletedItem = registrationList.removeLast()
+print(deletedItem)
+
+//page 2 of 4
+var walkingChallenges: Array<String> = ["Walk 3 miles a day", "Walk 1 hours everyday"]
+var runningChallenges = ["Run 5 times a week", "Run 5 miles every 2 days."]
+
+var challenges = [walkingChallenges, runningChallenges]
+
+//1st element in the 2nd challenge list
+print(challenges[1][0])
+print(challenges.removeAll())
+
+var committedChallenges = [String]()
+committedChallenges = ["a", "b", "c"]
+
+if committedChallenges.isEmpty {
+    print("user should commit to challenge")
+} else {
+    print("you have \(walkingChallenges.count) challenges")
 }
 
-let falcon = Spaceship(name: "Falcon")
-//falcon.name = "Falcon"
-for _ in 1...2 {
-    falcon.moveLeft()
-}
-falcon.moveRight()
-print(falcon.position)
-
-falcon.wasHit()
-
-class Fighter: Spaceship {
-    var weapon = ""
-    var remainingFirePower = 5
-    
-    override init(name: String) {
-        super.init(name: name)
-    }
-    
-    func fire() {
-        if remainingFirePower > 0 {
-            remainingFirePower -= 1
-        } else {
-            print("You have more fire power.")
-        }
-    }
+if challenges.count == 1 {
+    print("The challenge you have chosen is \(challenges[1][0])")
+} else {
+    print("You have chosen multiple challenges.")
 }
 
-var destroyer = Fighter(name: "Destroyer")
-destroyer.weapon = "Laser"
-destroyer.remainingFirePower = 10
-//destroyer.name = "Destroyer"
-destroyer.moveRight()
-print(destroyer.position)
+//page 3 of 4
 
-// we cannot call weapon via falcon instance bc the subclass is NOT the Spaceship class therefore the child class Fighter's property cannot be called in the parent class.
+var myDictionary: [String: Int] = [:]
+myDictionary["January"] = 31
+myDictionary["February"] = 28
+myDictionary["March"] = 31
+print(myDictionary)
 
-for _ in 1...5 {
-    destroyer.fire()
+myDictionary["April"] = 30
+print(myDictionary)
+
+myDictionary.updateValue(29, forKey: "February")
+print(myDictionary)
+
+if let january = myDictionary["January"] {
+    print("January has \(january) days")
 }
 
-class ShieldedShip: Fighter {
-    var shieldStrength = 25
-    
-    override init(name: String) {
-        super.init(name: name)
-    }
-    
-    override func wasHit() {
-        if shieldStrength > 0 {
-            shieldStrength -= 1
-        } else {
-            super.wasHit()  //   same as health -= 5
-        }
-    }
+//var dictionary = Dictionary<String, [String]>()
+var dictionary: [String: [String]] = [:]
+var shapes = ["Square", "Triangle", "Circle"]
+var colors = ["indigo", "blue", "pink"]
+
+dictionary[shapes[0]] = [colors[0]]
+dictionary[shapes[1]] = [colors[1]]
+dictionary[shapes[2]] = [colors[2]]
+print(dictionary)
+
+if let first = dictionary[shapes[shapes.count - 1]]{
+    print(first)
+
 }
 
-var defender = ShieldedShip(name: "Defender")
+var paces = [String : Double]()
+paces["Easy"] = 10.0
+paces["Medium"] = 8.0
+paces["Fast"] = 6.0
 
-//defender.name = "Defender"
-defender.weapon = "Cannon"
-defender.moveRight()
+print(paces)
 
-print(defender.position)
+paces["Sprint"] = 4.0
+print(paces)
 
-defender.fire()
+paces.updateValue(7.5, forKey: "Medium")
+paces.updateValue(5.8, forKey: "Fast")
+print(paces)
 
-print(defender.remainingFirePower)
+paces.removeValue(forKey: "Sprint")
+print(paces)
 
-defender.wasHit()
-
-print(defender.shieldStrength, defender.health)
-
-let sameShip = falcon
-print(sameShip.position)
-print(falcon.position)
-sameShip.moveLeft()
-print(sameShip.position, falcon.position)
-
-//the sameShip and falcon instances are printing the same result bc classes are reference types which means no matter how many instances are created from the same class, it all points the same place on memory, therefore inside of the print function the results will be the same.
+if let val = paces["Medium"] {
+    print("Okay! I'll keep you at a \(val) minute mile pace.")
+}
